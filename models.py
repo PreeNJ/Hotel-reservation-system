@@ -24,3 +24,18 @@ class Table(Base):
     is_available = Column(Boolean, default=True)
 
     reservations = relationship("Reservation", back_populates="table")
+
+
+class Reservation(Base):
+    __tablename__ = 'reservations'
+
+    id = Column(Integer, primary_key=True)
+    customer_id = Column(Integer, ForeignKey('customers.id'))
+    table_id = Column(Integer, ForeignKey('tables.id'))
+    reservation_time = Column(DateTime)
+    party_size = Column(Integer)
+    notes = Column(Text)
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+    customer = relationship("Customer", back_populates="reservations")
+    table = relationship("Table", back_populates="reservations")
