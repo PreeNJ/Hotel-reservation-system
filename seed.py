@@ -17,3 +17,26 @@ c2 = Customer(name="Bob", phone="0987654321", email="bob@gmail.com")
 
 t1 = Table(table_number=1, capacity=4)
 t2 = Table(table_number=2, capacity=2)
+
+# Create reservations
+r1 = Reservation(
+    customer=c1,
+    table=t1,
+    reservation_time=datetime.now() + timedelta(days=1),
+    party_size=2,
+    notes="Birthday"
+)
+r2 = Reservation(
+    customer=c2,
+    table=t2,
+    reservation_time=datetime.now() + timedelta(days=2),
+    party_size=2,
+    notes="Anniversary"
+)
+
+# Add to session
+session.add_all([c1, c2, t1, t2, r1, r2])
+session.commit()
+
+print("Database seeded successfully.")
+
