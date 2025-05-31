@@ -39,3 +39,4 @@ class Reservation(Base):
 
     customer = relationship("Customer", back_populates="reservations")
     table = relationship("Table", back_populates="reservations")
+
