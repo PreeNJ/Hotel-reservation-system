@@ -1,4 +1,4 @@
-# ─── Chunk 3 (Add printing for reservations and finalize script) ────────────────
+
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
