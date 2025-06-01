@@ -1,39 +1,26 @@
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-from lib.models import Customer, Table, Reservation
-from lib.helpers import validate_input
-from datetime import datetime
-
-engine = create_engine("sqlite:///restaurant.db")
-Session = sessionmaker(bind=engine)
-session = Session()
-
-def menu():
+# ─── Chunk 3 ────────────────────────────────────────────────────────────────────
+def customer_menu():
     while True:
-        print("\n--- Restaurant Reservation CLI ---")
-        print("1. Manage Customers")
-        print("2. Manage Tables")
-        print("3. Manage Reservations")
-        print("4. Exit")
+        print("\n--- Customer Menu ---")
+        print("1. Create Customer")
+        print("2. View All Customers")
+        print("3. Delete Customer")
+        print("4. Back to Main Menu")
         choice = input("Choose an option: ").strip()
 
         if choice == "1":
-            customer_menu()
+            name = input("Name: ").strip()
+            phone = input("Phone: ").strip()
+            email = input("Email: ").strip()
+            session.add(Customer(name=name, phone=phone, email=email))
+            session.commit()
+            print("Customer created.")
         elif choice == "2":
-            table_menu()
-        elif choice == "3":
-            reservation_menu()
-        elif choice == "4":
-            print("Goodbye!")
-            break
+            all_customers = session.query(Customer).all()
+            if not all_customers:
+                print("No customers found.")
+            for c in all_customers:
+                print(f"{c.id}: {c.name} (Email: {c.email}, Phone: {c.phone})")
+        # (options 3 and 4 still to be implemented)
         else:
             print("Invalid choice. Try again.")
-
-def customer_menu():
-    pass
-
-def table_menu():
-    pass
-
-def reservation_menu():
-    pass
