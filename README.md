@@ -31,7 +31,7 @@ A simple, menu-driven Python CLI application that allows restaurant staff to man
    Database seeded successfully.<br/>
 
 6. Run the CLI application:
-   python lib/cli.py
+   python client.py
    This launches an interactive menu where you can manage Customers, Tables, and Reservations.<br/>
 
  ## Features
